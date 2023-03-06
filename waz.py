@@ -1,4 +1,5 @@
 #pobranie biblioteki pygame
+import random
 import pygame
 
 #utworzenie funkcji waz
@@ -11,6 +12,12 @@ def waz():
     pygame.display.set_caption("Gra Wąż")
     #tworzymy zmienną, która przechowuje informacje czy gra jest uruchomiona
     run=True
+    #pozyvje startowe węża
+    zmiennaX=300
+    zmiennaY=300
+    #pozycja startowa jabłka
+    jablkoX=random.randint(0,600)
+    jablkoY=random.randint(0,600)
     #pętla while sprawdza czy warunek w zmiennej run jest prawdziwy, jak jest nieprawdziwy kończy swoje działanie
     while(run):
         #Wypełnienie okna kolorem
@@ -22,11 +29,24 @@ def waz():
             #jeżeli zmienna "zdarzenia" przechowuje naciśniecie przycisku zamknij to zmieniamy wartosć zmiennej "run"
             if zdarzenia.type==pygame.QUIT:
                 run=False
+                #obsługa zdarzeń klawiatury i zmiana pozycji węża
+            elif zdarzenia.type==pygame.KEYDOWN:
+                if zdarzenia.key==pygame.K_RIGHT:
+                    zmiennaX=zmiennaX+30
+                elif zdarzenia.key==pygame.K_LEFT:
+                    zmiennaX=zmiennaX-30
+                elif zdarzenia.key==pygame.K_UP:
+                    zmiennaY=zmiennaY-30
+                elif zdarzenia.key==pygame.K_DOWN:
+                    zmiennaY=zmiennaY+30
         #rysowanie węża
         #definiujemy kształ węża
-        ksztaltWaz=pygame.Rect((300,300),(15,15))
+        ksztaltWaz=pygame.Rect((zmiennaX,zmiennaY),(30,30))
         #dodanie kształtu do okienka
         pygame.draw.rect(oknoGry,(100,100,100),ksztaltWaz)
+
+        #rysowanie jabłka
+        pygame.draw.circle(oknoGry,(255,0,0),(jablkoX+15,jablkoY+15),15)
         #aktualizowanie zawartości okna gry
         pygame.display.update()
 
