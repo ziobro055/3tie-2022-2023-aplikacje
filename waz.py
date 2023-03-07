@@ -16,8 +16,8 @@ def waz():
     zmiennaX=300
     zmiennaY=300
     #pozycja startowa jabłka
-    jablkoX=random.randint(0,600)
-    jablkoY=random.randint(0,600)
+    jablkoX=random.randint(0,19)*30
+    jablkoY=random.randint(0,19)*30
     #pętla while sprawdza czy warunek w zmiennej run jest prawdziwy, jak jest nieprawdziwy kończy swoje działanie
     while(run):
         #Wypełnienie okna kolorem
@@ -44,6 +44,10 @@ def waz():
         ksztaltWaz=pygame.Rect((zmiennaX,zmiennaY),(30,30))
         #dodanie kształtu do okienka
         pygame.draw.rect(oknoGry,(100,100,100),ksztaltWaz)
+        #zjadanie jabłka
+        if zmiennaX==jablkoX and zmiennaY == jablkoY:
+            jablkoX=random.randint(0,19)*30
+            jablkoY=random.randint(0,19)*30
 
         #rysowanie jabłka
         pygame.draw.circle(oknoGry,(255,0,0),(jablkoX+15,jablkoY+15),15)
